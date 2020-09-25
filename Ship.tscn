@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Ship.gd" type="Script" id=2]
+
+[node name="Ship" type="RigidBody2D"]
+position = Vector2( 305, 241 )
+rotation = -1.5708
+gravity_scale = 0.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
