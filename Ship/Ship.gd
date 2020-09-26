@@ -31,12 +31,14 @@ func _process(delta):
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
 
+
 func initialize_shape():
 	shape = PoolVector2Array([
 		Vector2(-size, size), Vector2(0, -size),
 		Vector2(size, size), Vector2(0, size / 2),
 		Vector2(-size, size)
 	])
+
 
 func add_collision():
 	var collision = CollisionPolygon2D.new()
