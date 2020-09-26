@@ -8,6 +8,7 @@ const ROTATION_SPEED = PI / 64
 func _ready():
 	screen_size = get_viewport_rect().size
 
+
 func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		rotation += ROTATION_SPEED

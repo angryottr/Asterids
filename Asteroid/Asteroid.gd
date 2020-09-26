@@ -33,13 +33,13 @@ func generate_shape():
 		var radius_jitter = rng.randf_range(0.75, 1.25)
 		points.push_back(Vector2(cos(current_angle), sin(current_angle)) * radius * radius_jitter)
 		current_angle += (PI / (num_points / 2))
-	
-	points.push_back(points[0])
+
 
 func generate_velocities():
 	rotational_velocity = rng.randf_range(-2.0, 2.0)
 	var speed = rng.randf_range(10.0, 50.0)
 	velocity = Vector2(0, speed).rotated(rng.randf_range(0, 2 * PI))
+
 
 func add_collision():
 	var collision = CollisionPolygon2D.new()
