@@ -9,10 +9,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+size = 10
 
 [node name="Drawing" type="Node2D" parent="."]
 script = ExtResource( 3 )
-size = 10
-
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 0, -10, -10, 10, 10, 10 )

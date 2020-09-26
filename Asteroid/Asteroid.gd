@@ -5,10 +5,14 @@ var screen_size
 var velocity
 var rotational_velocity
 
-export var radius = 32
-export var num_points = 16
+export var size = 32
+export var shape_resolution = 16
+export var radius_jitter_lowerbound = 0.75
+export var radius_jitter_upperbound = 1.25
+export var angle_jitter_lowerbound = -0.1
+export var angle_jitter_upperbound = 0.1
 
-var points = PoolVector2Array()
+var shape = PoolVector2Array()
 
 func _ready():
 	rng.randomize()
@@ -29,10 +33,12 @@ func _process(delta):
 
 func generate_shape():
 	var current_angle = 0
-	for _i in range(num_points):
-		var radius_jitter = rng.randf_range(0.75, 1.25)
-		points.push_back(Vector2(cos(current_angle), sin(current_angle)) * radius * radius_jitter)
-		current_angle += (PI / (num_points / 2))
+	for _i in range(shape_resolution):
+		var radius_jitter = rng.randf_range(radius_jitter_lowerbound, radius_jitter_upperbound)
+		var angle_jitter = rng.randf_range(angle_jitter_lowerbound, angle_jitter_upperbound)
+		shape.push_back(Vector2(cos(current_angle), sin(current_angle)) * size * radius_jitter)
+		current_angle += (PI / (shape_resolution / 2)) + angle_jitter
+	shape.push_back(shape[0])
 
 
 func generate_velocities():
@@ -43,5 +49,5 @@ func generate_velocities():
 
 func add_collision():
 	var collision = CollisionPolygon2D.new()
-	collision.polygon = points
+	collision.polygon = shape
 	add_child(collision)
