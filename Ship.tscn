@@ -13,3 +13,4 @@ __meta__ = {
 
 [node name="Drawing" type="Node2D" parent="."]
 script = ExtResource( 3 )
+size = 10
