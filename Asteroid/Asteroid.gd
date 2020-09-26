@@ -1,9 +1,7 @@
-extends Area2D
+extends RigidBody2D
 
 var rng = RandomNumberGenerator.new()
 var screen_size
-var velocity
-var rotational_velocity
 
 export var size = 32
 export var shape_resolution = 16
@@ -17,18 +15,17 @@ var shape = PoolVector2Array()
 func _ready():
 	rng.randomize()
 	screen_size = get_viewport_rect().size
-	
+
 	generate_shape()
 	generate_velocities()
 	add_collision()
 
 
-func _process(delta):
-	rotation += rotational_velocity * delta
-	position += velocity * delta
-
-	position.x = wrapf(position.x, 0, screen_size.x)
-	position.y = wrapf(position.y, 0, screen_size.y)
+func _integrate_forces(state):
+	var transform = state.get_transform()
+	transform.origin.x = wrapf(transform.origin.x, 0, screen_size.x)
+	transform.origin.y = wrapf(transform.origin.y, 0, screen_size.y)
+	state.set_transform(transform)
 
 
 func generate_shape():
@@ -42,9 +39,9 @@ func generate_shape():
 
 
 func generate_velocities():
-	rotational_velocity = rng.randf_range(-2.0, 2.0)
-	var speed = rng.randf_range(10.0, 50.0)
-	velocity = Vector2(0, speed).rotated(rng.randf_range(0, 2 * PI))
+	angular_velocity = rng.randf_range(-4.0, 4.0)
+	var speed = rng.randf_range(20.0, 100.0)
+	linear_velocity = Vector2(0, speed).rotated(rng.randf_range(0, 2 * PI))
 
 
 func add_collision():
