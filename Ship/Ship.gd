@@ -1,7 +1,6 @@
-extends RigidBody2D
+extends Area2D
 
-var screen_size  # Size of the game window.
-
+var screen_size
 var velocity = Vector2()
 
 const ROTATION_SPEED = PI / 64

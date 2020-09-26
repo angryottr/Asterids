@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Ship/Ship.gd" type="Script" id=2]
+[ext_resource path="res://Ship/Drawing.gd" type="Script" id=3]
+
+[node name="Ship" type="Area2D"]
+position = Vector2( 305, 241 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Drawing" type="Node2D" parent="."]
+script = ExtResource( 3 )
+size = 10
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 0, -10, -10, 10, 10, 10 )
