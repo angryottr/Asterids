@@ -23,8 +23,8 @@ func _ready():
 
 func _integrate_forces(state):
 	var transform = state.get_transform()
-	transform.origin.x = wrapf(transform.origin.x, 0, screen_size.x)
-	transform.origin.y = wrapf(transform.origin.y, 0, screen_size.y)
+	transform.origin.x = wrapf(transform.origin.x, -size, screen_size.x + size)
+	transform.origin.y = wrapf(transform.origin.y, -size, screen_size.y + size)
 	state.set_transform(transform)
 
 

@@ -19,6 +19,7 @@ func _ready():
 func _process(delta):
 	if Input.is_action_pressed("ui_right"):
 		rotation += ROTATION_SPEED
+
 	if Input.is_action_pressed("ui_left"):
 		rotation -= ROTATION_SPEED
 
@@ -28,8 +29,8 @@ func _process(delta):
 
 	position += velocity * delta
 
-	position.x = wrapf(position.x, 0, screen_size.x)
-	position.y = wrapf(position.y, 0, screen_size.y)
+	position.x = wrapf(position.x, -size, screen_size.x + size)
+	position.y = wrapf(position.y, -size, screen_size.y + size)
 
 
 func initialize_shape():

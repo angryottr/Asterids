@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Ship/Ship.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Asteroid/Asteroid.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Bullet/Bullet.tscn" type="PackedScene" id=4]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 Asteroid = ExtResource( 3 )
+Bullet = ExtResource( 4 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
