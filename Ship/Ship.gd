@@ -24,7 +24,7 @@ func _process(delta):
 		rotation -= ROTATION_SPEED
 
 	if Input.is_action_pressed("ui_up"):
-		var new_velocity = Vector2(0, -5).rotated(rotation)
+		var new_velocity = Vector2(0, -200 * delta).rotated(rotation)
 		velocity += new_velocity
 
 	position += velocity * delta

@@ -3,6 +3,11 @@ extends RigidBody2D
 var rng = RandomNumberGenerator.new()
 var screen_size
 
+const TINY = 8
+const SMALL = 16
+const MEDIUM = 32
+const LARGE = 64
+
 export var size = 32
 export var shape_resolution = 16
 export var radius_jitter_lowerbound = 0.75
@@ -12,6 +17,10 @@ export var angle_jitter_upperbound = 0.1
 
 var shape = PoolVector2Array()
 
+func _init():
+	var size = random_size()
+	set_size(size)
+
 func _ready():
 	rng.randomize()
 	screen_size = get_viewport_rect().size
@@ -19,6 +28,11 @@ func _ready():
 	generate_shape()
 	generate_velocities()
 	add_collision()
+
+
+func set_size(size):
+	self.size = size
+	mass = size
 
 
 func _integrate_forces(state):
@@ -48,3 +62,27 @@ func add_collision():
 	var collision = CollisionPolygon2D.new()
 	collision.polygon = shape
 	add_child(collision)
+
+
+func random_size():
+	return [TINY, SMALL, MEDIUM, LARGE][randi() % 4]
+
+
+func is_tiny():
+	return size == TINY
+
+
+func is_small():
+	return size == SMALL
+
+
+func is_medium():
+	return size == MEDIUM
+
+
+func is_large():
+	return size == LARGE
+
+
+func next_size_down():
+	return size / 2
