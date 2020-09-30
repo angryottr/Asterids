@@ -11,6 +11,9 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
+		var ship = get_node("Ship")
+		if ship.get_world_2d().direct_space_state.intersect_point(event.position):
+			return
 		var asteroid = Asteroid.instance()
 		asteroid.position = event.position
 		add_child(asteroid)
