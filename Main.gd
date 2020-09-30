@@ -1,6 +1,7 @@
 extends Node
 
 export (PackedScene) var Asteroid
+export (PackedScene) var Explosion
 export (PackedScene) var Bullet
 
 var rng = RandomNumberGenerator.new()
@@ -30,6 +31,8 @@ func _input(event):
 func _on_Bullet_hit_Asteroid(asteroid, bullet):
 	bullet.queue_free()
 
+	explode(asteroid)
+
 	if !asteroid.is_tiny():
 		var spread = 1.5
 		var new_asteroid_count = rng.randi_range(2, 4)
@@ -52,3 +55,14 @@ func _on_Bullet_hit_Asteroid(asteroid, bullet):
 			call_deferred("add_child", new_asteroid)
 
 	asteroid.queue_free()
+
+func explode(asteroid):
+	var explosion = Explosion.instance()
+
+	explosion.linear_velocity = asteroid.linear_velocity
+	explosion.angular_velocity = asteroid.angular_velocity
+	explosion.position = asteroid.position
+	explosion.amount = asteroid.size
+	explosion.emitting = true
+
+	call_deferred("add_child", explosion)
