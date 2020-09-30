@@ -12,14 +12,13 @@ export var size = 32
 export var shape_resolution = 16
 export var radius_jitter_lowerbound = 0.75
 export var radius_jitter_upperbound = 1.25
-export var angle_jitter_lowerbound = -0.1
-export var angle_jitter_upperbound = 0.1
 
 var shape = PoolVector2Array()
 
 func _init():
 	var size = random_size()
 	set_size(size)
+
 
 func _ready():
 	rng.randomize()
@@ -46,9 +45,8 @@ func generate_shape():
 	var current_angle = 0
 	for _i in range(shape_resolution):
 		var radius_jitter = rng.randf_range(radius_jitter_lowerbound, radius_jitter_upperbound)
-		var angle_jitter = rng.randf_range(angle_jitter_lowerbound, angle_jitter_upperbound)
 		shape.push_back(Vector2(cos(current_angle), sin(current_angle)) * size * radius_jitter)
-		current_angle += (PI / (shape_resolution / 2)) + angle_jitter
+		current_angle += (PI / (shape_resolution / 2))
 	shape.push_back(shape[0])
 
 

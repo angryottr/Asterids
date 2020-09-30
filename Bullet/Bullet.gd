@@ -3,10 +3,11 @@ extends Area2D
 const COLOR = Color(1.0, 1.0, 1.0)
 
 var screen_size
-var velocity = Vector2(0, -150)
+var velocity = Vector2(0, -400)
 
 func _ready():
 	screen_size = get_viewport_rect().size
+
 
 func _draw():
 	draw_line(Vector2(0, 0), Vector2(0, 1), COLOR)

@@ -8,6 +8,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed:
 		var asteroid = Asteroid.instance()
@@ -39,6 +40,6 @@ func _on_Bullet_hit_Asteroid(asteroid, bullet):
 				rng.randi_range(-asteroid.size * spread, asteroid.size * spread),
 				rng.randi_range(-asteroid.size * spread, asteroid.size * spread)
 			)
-			add_child(new_asteroid)
+			call_deferred("add_child", new_asteroid)
 
 	asteroid.queue_free()
