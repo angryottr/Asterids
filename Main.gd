@@ -14,7 +14,7 @@ func _input(event):
 		var asteroid = Asteroid.instance()
 		asteroid.position = event.position
 		add_child(asteroid)
-	
+
 	if event is InputEventKey and event.pressed and event.scancode == KEY_SPACE:
 		var bullet = Bullet.instance()
 		bullet.position = $Ship.position
@@ -34,12 +34,18 @@ func _on_Bullet_hit_Asteroid(asteroid, bullet):
 
 		for _i in range(new_asteroid_count):
 			var new_asteroid = Asteroid.instance()
+
 			new_asteroid.set_size(new_asteroid_size)
 			new_asteroid.position = asteroid.position
 			new_asteroid.position += Vector2(
 				rng.randi_range(-asteroid.size * spread, asteroid.size * spread),
 				rng.randi_range(-asteroid.size * spread, asteroid.size * spread)
 			)
+			new_asteroid.initial_linear_velocity = (
+				asteroid.linear_velocity +
+					(new_asteroid.position - asteroid.position) * 2
+			)
+
 			call_deferred("add_child", new_asteroid)
 
 	asteroid.queue_free()

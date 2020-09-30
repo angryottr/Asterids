@@ -13,6 +13,9 @@ export var shape_resolution = 16
 export var radius_jitter_lowerbound = 0.75
 export var radius_jitter_upperbound = 1.25
 
+var initial_linear_velocity
+var initial_angular_velocity
+
 var shape = PoolVector2Array()
 
 func _init():
@@ -51,9 +54,16 @@ func generate_shape():
 
 
 func generate_velocities():
-	angular_velocity = rng.randf_range(-4.0, 4.0)
-	var speed = rng.randf_range(20.0, 100.0)
-	linear_velocity = Vector2(0, speed).rotated(rng.randf_range(0, 2 * PI))
+	if initial_angular_velocity:
+		angular_velocity = initial_angular_velocity
+	else:
+		angular_velocity = rng.randf_range(-4.0, 4.0)
+
+	if initial_linear_velocity:
+		linear_velocity = initial_linear_velocity
+	else:
+		var speed = rng.randf_range(20.0, 100.0)
+		linear_velocity = Vector2(0, speed).rotated(rng.randf_range(0, 2 * PI))
 
 
 func add_collision():
